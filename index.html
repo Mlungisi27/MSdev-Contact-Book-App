@@ -24,7 +24,7 @@
             })
             .then(function (data) {
                 displayOutput(data);
-                //console.log(data);
+                console.log(data);
             })
         }
 
@@ -32,7 +32,7 @@
             let output = "<table>";
             for (let a in data) {
                 output += `
-                    <tr>
+                    <tr onClick="editContact(${data[a].id})">
                         <td><img src="${rootPath}controller/uploads/${data[a].avatar}" alt="avatar" width="50"/></td>
                         <td><h5>${data[a].firstname}</h5></td>
                         <td><h5>${data[a].lastname}</h5></td>
@@ -46,7 +46,11 @@
         function addContact() {
             window.open("add-contact.html", "_self");
         }
-
+        
+        function editContact(id) {
+            window.open("edit-contact.html?id=" + id, "_self");
+            
+        }
     </script>
 </body>
 </html>
