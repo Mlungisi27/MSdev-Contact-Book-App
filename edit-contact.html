@@ -28,7 +28,30 @@
 
     <script src="config.js"></script>
     <script>
-        
+        var id = getId();
+        console.log("ID is: " + id);
+        function getId() {
+            var url= window.location.href;
+            var pos = url.search("=")
+            var id = url.slice(pos + 1);
+            return id;
+        }
+
+        function getContact() {
+            fetch(rootPath + "controller/get-contact/?id=" + id)
+            .then(function(response) {
+                return response.json(); 
+            })
+            .then(function(data) {
+                //display contact info
+                console.log(data)
+            }) 
+        }
+
+        function homeLink() {
+            window.open("index.html", "_self");
+        }
+        document.getElementById("homeLink").addEventListener('click', homeLink);
     </script>
 </body>
 </html>
