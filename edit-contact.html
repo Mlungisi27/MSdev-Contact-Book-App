@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MSdev Contact Book App</title>
 </head>
-<body>
+<body onload="getContact()">
     <div id="avatarImage"></div>
     <form id = "editForm">
         <label for="firstname">First Name</label>
@@ -29,6 +29,7 @@
     <script src="config.js"></script>
     <script>
         var id = getId();
+        document.getElementById("homeLink").addEventListener('click', homeLink);
         console.log("ID is: " + id);
         function getId() {
             var url= window.location.href;
@@ -38,20 +39,27 @@
         }
 
         function getContact() {
-            fetch(rootPath + "controller/get-contact/?id=" + id)
+            fetch(rootPath + "controller/get-contact/?id=" + id + "&apiKey=" + apiKey)
             .then(function(response) {
                 return response.json(); 
             })
             .then(function(data) {
-                //display contact info
-                console.log(data)
+                displayOutput(data);
+                console.log(data);
             }) 
         }
 
         function homeLink() {
             window.open("index.html", "_self");
         }
-        document.getElementById("homeLink").addEventListener('click', homeLink);
+
+        function displayOutput(data) {
+            var avatarImage = `<img  src= "${rootPath}controller/uploads/${data[0].avatar}" alt = "avatar" width="200">`;
+
+            document.getElementById("avatarImage").innerHTML = avatarImage;
+            
+        }
+
     </script>
 </body>
 </html>
