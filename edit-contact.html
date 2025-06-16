@@ -39,7 +39,7 @@
         }
 
         function getContact() {
-            fetch(rootPath + "controller/get-contact/?id=" + id + "&apiKey=" + apiKey)
+            fetch(rootPath + "controller/get-contact/id=" + id + "&apiKey=" + apiKey)
             .then(function(response) {
                 return response.json(); 
             })
